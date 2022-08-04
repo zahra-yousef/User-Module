@@ -1,0 +1,293 @@
+/*########## Defaults ############*/
+nav, header, footer{
+    display: block;
+}
+
+body{
+    line-height: 1;
+    margin: 0;
+    font-family: 'Poppins', sans-serif; 
+}
+
+label{
+    font-size: 35px;
+    font-weight:600; /*level of Bold*/
+}
+
+p{
+    font-size: 28px;
+    line-height: 1.2;
+}
+
+.container{
+    width: 100%;
+    margin: auto; /*to center the content inside the container*/
+    padding-top: 4%;
+    padding-bottom: 8%;
+}
+
+.row{
+    width: 100%;
+    display: flex; /*to change element size according on screen size*/
+    flex-wrap: wrap; /*to shift elemnt arround*/
+    align-items: center;
+}
+
+.row::after{
+    display: table; /*Let the element behave like a <table> element*/
+    clear: both; /*remove float from right and left*/
+    content:"";
+}
+
+.col-1{width: 8.33%;}
+.col-2{width: 16.66%;}
+.col-3{width: 25%;}
+.col-4{width: 33.33%;}
+.col-5{width: 41.66%;}
+.col-6{width: 50%;}
+.col-7{width: 58.33%;}
+.col-8{width: 66.66%;}
+.col-9{width: 75%;}
+.col-10{width: 83.33%;}
+.col-11{width: 91.66%;}
+.col-12{width: 100%;}
+
+*{
+    box-sizing: border-box;
+}
+/*######## Nav bar ##########*/
+nav{
+    width: 100%;
+    margin: 0;
+}
+
+nav ul{
+    background-color: #eee;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+}
+
+ul.top-nav li{
+    list-style: none; /*to remove bullet point from the list*/
+    float: left;
+}
+
+ul.top-nav li.top-nav-right{
+    float: right;
+}
+
+ul.top-nav li a{
+    display: block;
+    text-decoration: none;
+    min-height: 16px; /*instead of font size so, it will be sized when browser shrink*/
+    text-align: center;
+    padding: 14px;
+    text-transform: uppercase;
+    color: #666;
+}
+
+ul.top-nav li a:hover{
+    background-color: #ffa500 ;
+    color: #fff;
+} 
+
+ul.top-nav li.dropdownIcon{
+    display: none; 
+}
+
+/*########### Custom Style #############*/
+#section-1-gradient{
+    background-color: #4fa687; /* For browsers that do not support gradients */
+    background-image: linear-gradient(#4fa687, #74bea4);
+}
+
+div.leftSide-col{
+    margin-left: 30%;
+}
+
+div.rigthSide-col{
+    margin-right: 30%;
+    margin-left: 10%;
+}
+
+.videoContainer iframe{ /*to position the video in the center ato position the video in the nd take the size of the screen*/
+    width: 100%;
+    margin: 0;
+}
+
+div.box{
+    text-align: center;  /*to center all the elements inside the class*/
+    margin: 0px 24px 24px 24px;
+    padding: 36px 24px 40px 24px;
+    border-radius: 7px; 
+    background-color: #fff;
+    box-shadow: 0 0 0 1px rgba(0,0,0,.15), 
+        0 2px 3px 0 rgba(0,0,0,.1); /*https://www.cssmatic.com/box-shadow*/
+}
+
+div.icon{ 
+    width: 100%
+}
+
+p.error{
+    background: #F2DEDE;
+    color: #A94442;
+    padding: 10px;
+    width: 100%;
+    border-radius: 5px;
+    margin: 0;
+    font-size: 20px;
+}
+
+button{
+    font-size: 24px;
+    font-weight: 600;
+    color: #fff;
+    background-color: #ffa500;
+    border-color: #ffa500;
+    padding: 10px 40px;
+    display: block;
+    text-align: center;
+    margin: 5px;
+    border-radius: 7px;
+    width: 400px;
+}
+
+button.learnMore{
+    display: block;
+    margin: auto;  
+}
+
+button.loginButton{
+    display: block;
+    margin-top: 10%;  
+}
+
+h1.large{
+    color: #fff;
+    font-size: 56px;
+    margin: 0;
+    line-height: 70px; /*adding space only between text and rempve all around margin*/
+}
+
+h1.section2Header{
+    font-size: 50px;
+    text-align: center;
+}
+
+form h2{
+    color: #18181b;
+}
+
+/*for input type of text*/
+input[type="text"]{
+    font-size: 20px;
+    width: 400px;
+    min-width: 100px;
+    padding: 5px;
+    border-radius: 7px;
+}
+
+div.loginForm{
+    display: inline-block;
+}
+
+#formCenter{
+    position: relative; 
+    margin: auto;
+}
+
+footer.myFooter{
+    background-color: #e0e0eb;
+    padding-left: 10%;  
+}
+
+footer.myFooter h1{
+    color: #18181b;
+    font-size: 28px;
+}
+
+footer.myFooter ul{
+    list-style: none;
+    text-align: left;
+    padding-left: 0;
+}
+
+footer.myFooter ul li{
+    color: #18181b;
+    font-size: 20px;
+    line-height: 1.5;
+}
+
+/*######### Mobile ##########*/
+@media screen and (max-width: 680px){
+     ul.top-nav li:not(:nth-child(1)){ /*hide all elemnts in nav bar except the HOME*/
+        display: none;
+    } 
+    
+    ul.top-nav li.dropdownIcon{
+        display: block; 
+        float: right;
+    }
+    
+    ul.top-nav.responsive li.dropdownIcon{
+        position: absolute; /*to place the icon in certain position*/
+        top:0;
+        right:0;
+        /*to place the icon in the specified position (top right corner)*/
+    }
+    
+    ul.top-nav.responsive{
+        position: relative;
+    }
+    
+    ul.top-nav.responsive li{
+        display: inline;
+        float: none;
+    }
+    
+    ul.top-nav.responsive li a{
+        display: block;
+        text-align: left;
+    }
+    
+     h1.section2Header{
+        font-size: 50px;
+    }
+    
+    div.box{
+        padding: 5px;
+        display: block;
+    }
+    
+    .col-4,
+    .col-6,
+    .col-7,
+    .col-0{
+        width: 100%;
+        margin: 0;
+    }
+    
+    div.mobileStack{
+        width: 50%;
+        display: block;
+    }
+    
+    div.leftSide-col,
+    div.rightSide-col,
+    form{
+       margin: 15px;
+    }
+    
+    input[type="text"]{
+/*        width: 350px; Change it */
+    }
+    
+    .videoContainer iframe, div.loginForm{ /*to position the video in the center ato position the video in the nd take the size of the screen*/
+        position: relative;
+        width: 100%;
+        margin: 0;
+        overflow: hidden;
+    }
+}
