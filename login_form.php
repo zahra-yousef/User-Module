@@ -10,7 +10,10 @@
     </head>
     <body>
         <?php include 'header.php';?>
-        
+        <script>
+            document.getElementById("logout-tab").style.display = 'none';
+            document.getElementById("profile-tab").style.display = 'none';
+        </script>
         <header>
             <h1 class="section2Header">Login to your account..</h1>
         </header>

@@ -1,5 +1,8 @@
 <?php
-    /*#2 - Get Data from the Form*/
+    session_start();
+
+    include "connection.php";
+
     $uname = $name = $email = $dob = $pass = $cpass = $phone = "";
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -14,68 +17,63 @@
         $name = validate($_POST["name"]);
         $uname = validate($_POST["username"]);
         $email = validate($_POST["email"]);
-        $dob = validate($_POST["dob"]);
+        $dob = date('Y-m-d', strtotime($_POST['dob']));
         $pass = validate($_POST["password"]);
         $cpass = validate($_POST["cpassword"]);
         $phone = validate($_POST["phone"]);
         
-        if (empty($_POST["username"])) {
-            header("Location: signup_form.php?error=Username is required!");
+        $user_data = 'uname='. $uname. '&name='.$name
+                     .'&email='. $email. '&dob='.$dob.
+                    '&phone='.$phone;
+        
+        if(empty($name)){
+            header("Location: signup_form.php?error=Name is required!&$user_data");
+            exit();  
+        }else if (!preg_match("/^[a-zA-Z-' ]*$/",$name)) { // check if name only contains letters and whitespace
+            header("Location: signup_form.php?error=Only letters and white space allowed!");
             exit();
-        } else if(empty($_POST["name"])){
-            
-            
-            
-        } else if (!preg_match("/^[a-zA-Z-' ]*$/",$uname)) { // check if name only contains letters and whitespace
-              $unameErr = "Only letters and white space allowed";
-        }
-      
-        if (empty($_POST["email"])) {
-            $emailErr = "Email is required";
-        } else {
-            $email = test_input($_POST["email"]);
-            // Remove all illegal characters from email
-            $email = filter_var($email, FILTER_SANITIZE_EMAIL);
+        }else if (empty($uname)) {
+            header("Location: signup_form.php?error=Username is required!&$user_data");
+            exit();
+        }else if(empty($email)){
+            header("Location: signup_form.php?error=Email is required!&$user_data");
+            exit();
+        }else if(preg_match('/^[0-9]{11}+$/', $phone)){
+            header("Location: signup_form.php?error=Phone is invalid!&$user_data");
+            exit();
+        }else if (empty($pass)) {
+            header("Location: signup_form.php?error=Password is required!&$user_data");
+            exit();
+        }else if ($pass !== $cpass) {
+            header("Location: signup_form.php?error=The confirmation password does not "
+                . "match&$user_data");
+            exit();
+        }else{
+            echo $phone. '  '. $dob;
+            //hashing the password
+            $pass = md5($pass); 
+            $sql = "SELECT * FROM users WHERE user_name = '$uname'";
+            $result = mysqli_query($conn, $sql);
 
-            // Validate e-mail
-            if (!filter_var($email, FILTER_VALIDATE_EMAIL) === false) {
-              echo("$email is a valid email address");
-            } else {
-              echo("$email is not a valid email address");
+            if(mysqli_num_rows($result) > 0){
+                header("Location: signup_form.php?error=The username is taken try another "
+                    . "&$user_data");
+                exit();
+            }else{
+                $sql2 = "INSERT INTO users(user_name, email, password, dob, first_name, phone) "
+                        . "VALUES('$uname', '$email', '$pass', '$dob', '$name', '$phone')";
+                $result2 = mysqli_query($conn, $sql2);
+
+                if ($result2) {
+                    header("Location: home_form.php");
+                    exit();
+                }else {
+                    header("Location: signup_form.php?error=unknown error occurred&$user_data");
+                    exit();
+                }
             }
-        }
-        
-        if (empty($_POST["DOB"])) {
-            $dobErr = "Birth date is required";
-        } else {
-            $dob = test_input($_POST["DOB"]);
-        }
-        
-        if (empty($_POST["password"])) {
-            $passErr = "Password is required";
-        } else {
-            $pass = test_input($_POST["password"]);
-        }
-        
-        if (empty($_POST["cpassword"])) {
-            $cpassErr = "Confirming Password is required";
-        } else {
-            $cpass = test_input($_POST["cpassword"]);
         }
     } else {
         header("Location: signup_form.php");
         exit();
-    }
-
-    
-
-    
-    /*#3 - Insert data into DB*/
-    $sql = "INSERT INTO test1 (id, name)
-            VALUES ('$id', '$fname')";
-
-    if ($conn->query($sql) === TRUE) {
-        echo "New record created successfully";
-    } else {
-        echo "Error: " . $sql . "<br>" . $conn->error;
     }

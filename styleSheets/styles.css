@@ -10,8 +10,9 @@ body{
 }
 
 label{
-    font-size: 35px;
+    font-size: 32px;
     font-weight:600; /*level of Bold*/
+    line-height: 1.5;
 }
 
 p{
@@ -181,7 +182,17 @@ form h2{
 }
 
 /*for input type of text*/
-input[type="text"]{
+input[type="text"],
+input[type="password"]{
+    font-size: 20px;
+    width: 400px;
+    min-width: 100px;
+    padding: 5px;
+    border-radius: 7px;
+}
+
+/*for input type of text*/
+input[type="date"]{
     font-size: 20px;
     width: 400px;
     min-width: 100px;

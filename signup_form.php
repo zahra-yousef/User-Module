@@ -10,6 +10,10 @@
     </head>
     <body>
         <?php include 'header.php';?>
+        <script>
+            document.getElementById("logout-tab").style.display = 'none';
+            document.getElementById("profile-tab").style.display = 'none';
+        </script>
         
         <header>
             <h1 class="section2Header">Create a new account..</h1>
@@ -18,38 +22,82 @@
          <div class="container">
             <div class="row">
                 <div class="col-0" id="formCenter">
-                    <form action="index.php" method="index.php">
+                    <form action="signup.php" method="post">
                         <div class="loginForm">
                             <?php if(isset($_GET['error'])) { ?> 
                                 <p class="error"><?php echo $_GET['error'];?></p>
                             <?php } ?>
-                            
+
                             <h2>Name</h2>
-                            <input class="inputbox" name="name" type="text" placeholder="Enter name">
-                            <br><br>
+                            <?php if(isset($_GET['name'])) { ?> 
+                                <input class="inputbox" 
+                                       name="name" 
+                                       type="text" 
+                                       placeholder="Enter name" 
+                                       value="<?php echo $_GET['name'];?>">
+                                <br><br>
+                            <?php } else {?>
+                                <input class="inputbox" 
+                                       name="name" 
+                                       type="text" 
+                                       placeholder="Enter name">
+                                <br><br>
+                            <?php  } ?>
                                 
                             <h2>Username</h2>
-                            <input class="inputbox" name="username" type="text" placeholder="Enter username">
-                            <br><br>
-                            
+                            <?php if(isset($_GET['uname'])) { ?> 
+                                <input class="inputbox" 
+                                       name="username" 
+                                       type="text" 
+                                       placeholder="Enter username"
+                                       value="<?php echo $_GET['uname'];?>">
+                                <br><br>
+                            <?php } else {?>
+                                <input class="inputbox" 
+                                       name="username" 
+                                       type="text" 
+                                       placeholder="Enter username">
+                                <br><br>
+                            <?php  } ?>
+                                
                             <h2>Email</h2>
-                            <input class="inputbox" name="email" type="text" placeholder="Enter email">
-                            <br><br>
-                            
+                            <?php if(isset($_GET['email'])) { ?>
+                                <input class="inputbox" 
+                                       name="email" 
+                                       type="text" 
+                                       placeholder="Enter email"
+                                       value ="<?php echo $_GET['email'];?>">
+                                <br><br>
+                            <?php } else {?>
+                                <input class="inputbox" 
+                                       name="email" 
+                                       type="text" 
+                                       placeholder="Enter email">
+                                <br><br>
+                            <?php  } ?>   
+                                
                             <h2>Birth Date</h2>
-                            <input class="inputbox" name="DOB" type="text" placeholder="Enter date of birth">
-                            <br><br>
+                            <input  type="date" name="dob" value="2022-01-31">
                             
                             <h2>Phone</h2>
-                            <input class="inputbox" name="phone" type="text" placeholder="Enter phone number">
+                            <input class="inputbox" 
+                                   name="phone" 
+                                   type="text" 
+                                   placeholder="Enter phone number">
                             <br><br>
                             
                             <h2>Password</h2>
-                            <input class="inputbox" name="password" type="text" placeholder="Enter password">
+                            <input class="inputbox" 
+                                   name="password" 
+                                   type="password" 
+                                   placeholder="Enter password">
                             <br><br>
                             
                             <h2>Confirm Password</h2>
-                            <input class="inputbox" name="cpassword" type="text" placeholder="Re-Enter password">
+                            <input class="inputbox" 
+                                   name="cpassword" 
+                                   type="password" 
+                                   placeholder="Re-Enter password">
                             <br><br>
                             
                             <button type="submit" class="loginButton">Submit</button>
