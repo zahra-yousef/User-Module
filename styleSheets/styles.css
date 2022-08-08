@@ -10,7 +10,7 @@ body{
 }
 
 label{
-    font-size: 32px;
+    font-size: 28px;
     font-weight:600; /*level of Bold*/
     line-height: 1.5;
 }
@@ -131,7 +131,7 @@ div.icon{
     width: 100%
 }
 
-p.error{
+p.error, .success{
     background: #F2DEDE;
     color: #A94442;
     padding: 10px;
@@ -139,6 +139,11 @@ p.error{
     border-radius: 5px;
     margin: 0;
     font-size: 20px;
+}
+
+.success{
+    background: #D4EDDA;
+    color: #40754C;
 }
 
 button{
@@ -159,6 +164,24 @@ button.learnMore{
     display: block;
     margin: auto;  
 }
+
+#editButton{
+    background-color: #4B5BE6;
+    border-color: #4B5BE6;
+    margin-bottom: 5px;
+} 
+
+#deleteButton{
+    background-color: #E64B5F;
+    border-color: #E64B5F;
+    margin-bottom: 5px;
+} 
+
+#saveButton{
+    background-color: #4BE69F;
+    border-color: #4BE69F;
+    margin-bottom: 5px;
+} 
 
 button.loginButton{
     display: block;
@@ -183,12 +206,18 @@ form h2{
 
 /*for input type of text*/
 input[type="text"],
-input[type="password"]{
+input[type="password"],
+profilebox{
     font-size: 20px;
     width: 400px;
     min-width: 100px;
     padding: 5px;
     border-radius: 7px;
+}
+
+profilebox{
+    margin-left: 20%;
+    margin-right: 20%;
 }
 
 /*for input type of text*/
@@ -198,6 +227,12 @@ input[type="date"]{
     min-width: 100px;
     padding: 5px;
     border-radius: 7px;
+}
+
+.buttonLink{
+    text-decoration: none;
+    color: #fff;
+    display: inline-block;
 }
 
 div.loginForm{
@@ -273,6 +308,7 @@ footer.myFooter ul li{
     }
     
     .col-4,
+    .col-5,
     .col-6,
     .col-7,
     .col-0{

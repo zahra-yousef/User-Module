@@ -28,11 +28,11 @@
                             <?php } ?>
                             
                             <h2>Username</h2>
-                            <input class="inputbox" name="username" type="text" placeholder="Enter username or email">
+                            <input class="inputbox" name="username" type="text" placeholder="Enter username">
                             <br><br>
                             
                             <h2>Password</h2>
-                            <input class="inputbox" name="password" type="text" placeholder="Enter password">
+                            <input class="inputbox" name="password" type="password" placeholder="Enter password">
                             <br><br>
                             
                             <button class="loginButton">Let's Go!</button>

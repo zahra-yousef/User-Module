@@ -77,7 +77,7 @@
                             <?php  } ?>   
                                 
                             <h2>Birth Date</h2>
-                            <input  type="date" name="dob" value="2022-01-31">
+                            <input  type="date" name="dob" value="0000-00-00">
                             
                             <h2>Phone</h2>
                             <input class="inputbox" 

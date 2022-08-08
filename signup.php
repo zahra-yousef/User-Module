@@ -38,7 +38,8 @@
         }else if(empty($email)){
             header("Location: signup_form.php?error=Email is required!&$user_data");
             exit();
-        }else if(preg_match('/^[0-9]{11}+$/', $phone)){
+        }else if(preg_match('/^[0-9]{11}+$/', $phone)){ 
+            //https://www.delftstack.com/howto/php/php-validate-phone-number/
             header("Location: signup_form.php?error=Phone is invalid!&$user_data");
             exit();
         }else if (empty($pass)) {
