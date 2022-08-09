@@ -1,7 +1,7 @@
 <?php 
     session_start();
     if(isset($_SESSION['user_name']) 
-      && isset($_SESSION['emai'])){
+      && isset($_SESSION['email'])){
 ?>
 
 <!DOCTYPE html>
@@ -25,8 +25,9 @@
         <div class="container">
             <form action="delete_user.php" method="post">
                 <div class="row">
-                    <div class="col-7" id="formCenter">
-                        <div class="box">
+                    <div class="col-0" id="formCenter">
+                        <!--<div class="box">-->
+                        <div class="loginForm">
                             <div class="icon">
                                 <img src="images/user.png">
                             </div>
@@ -38,6 +39,7 @@
                             <?php if(isset($_GET['success'])) { ?> 
                                 <p class="success"><?php echo $_GET['success'];?></p>
                             <?php } ?> 
+                                
                             <label>Your Email: </label><br>
                             <input
                                    class="profilebox" 
@@ -53,7 +55,8 @@
                                    type="password" 
                                    placeholder="Enter your password"
                                     ><br><br>
-                        </div>              
+                        </div>  
+                        <!--</div>-->              
                     </div>
                 </div>
 

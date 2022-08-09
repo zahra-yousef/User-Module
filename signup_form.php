@@ -103,6 +103,7 @@
                             <button type="submit" class="loginButton">Submit</button>
                         </div>
                     </form>
+                    <a href="login_form.php" class="loginLink">Already have an account?</a>
                 </div>
             </div>
         </div>

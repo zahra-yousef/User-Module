@@ -8,7 +8,7 @@
     <body>
         <nav>
             <ul class="top-nav" id="dropDownClick">
-                <li><a href="#home">Home</a></li>
+                <li><a href="home_form.php">Home</a></li>
                 <li><a href="#news">Techno</a></li>
                 <li><a href="#contact">Contact</a></li>
                 <li><a href="#about">About</a></li>

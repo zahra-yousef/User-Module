@@ -38,6 +38,7 @@
                             <button class="loginButton">Let's Go!</button>
                         </div>
                     </form>
+                    <a href="signup_form.php" class="loginLink">Create an account</a>
                 </div>
             </div>
         </div>

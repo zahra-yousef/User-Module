@@ -1,7 +1,7 @@
 <?php 
     session_start();
     if(isset($_SESSION['user_name']) && isset($_SESSION['first_name'])
-      && isset($_SESSION['emai']) && isset($_SESSION['dob'])
+      && isset($_SESSION['email']) && isset($_SESSION['dob'])
       && isset($_SESSION['phone'])  ){
 ?>
 <!DOCTYPE html>
@@ -23,10 +23,10 @@
         </header>
         
         <div class="container">
-            <form action="profile.php" method="post">
+            <form action="#" method="post">
                 <div class="row">
-                    <div class="col-7" id="formCenter">
-                        <div class="box">
+                    <div class="col-0" id="formCenter">
+                        <div class="loginForm">
                             <div class="icon">
                                 <img src="images/user.png">
                             </div>
@@ -35,6 +35,10 @@
                                 <p class="error"><?php echo $_GET['error'];?></p>
                             <?php } ?>                       
 
+                            <?php if(isset($_GET['success'])) { ?> 
+                                <p class="success"><?php echo $_GET['success'];?></p>
+                            <?php } ?> 
+                                
                             <label>Your Name: </label><br>
                             <input id="nameTxt" 
                                    class="profilebox" 
@@ -48,7 +52,7 @@
                                    class="profilebox" 
                                    name="email" 
                                    type="text" 
-                                   value="<?php echo $_SESSION['emai'];?>"
+                                   value="<?php echo $_SESSION['email'];?>"
                                    disabled><br><br>
 
                             <label>Your Phone: </label><br>
@@ -66,29 +70,40 @@
                                    type="text" 
                                    value="<?php echo $_SESSION['dob'];?>"
                                    disabled><br><br> 
-                        </div>              
+                        </div>
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="col-12">
-                        <button id="editButton" class="learnMore" name="editButton">
-                            <a href="home_form.php" class="buttonLink">Edit User</a>
+                        <button id="deleteButton" 
+                                class="learnMore" 
+                                name="deleteButton"
+                                type="submit"
+                                formaction="delete_form.php">
+                            Delete Account
                         </button>
-                        <button id="deleteButton" class="learnMore" name="deleteButton">
-                            <a href="delete_form.php" 
-                               class="buttonLink">
-                                Delete User
-                            </a></button>
-                        <button id="saveButton" class="learnMore" name="saveButton">Save Changes</button>
+                        <button id="saveButton" 
+                                class="learnMore" 
+                                name="saveButton"
+                                type="submit"
+                                formaction="profile.php">
+                            Save Changes
+                        </button>
                     </div>
                 </div>
              </form> 
+                <button id="editButton" 
+                        class="learnMore" name="editButton">Edit User</button>
         </div>
         
         <script>
+            document.getElementById("saveButton").style.display = "none";
+            
 //            https://www.techiedelight.com/disable-enable-input-text-box-javascript/
             document.getElementById('editButton').onclick = function(){
+                document.getElementById("editButton").style.display = "none";
+                document.getElementById("saveButton").style.display = "block";
                 const ids = ["nameTxt", "emailTxt", "phoneTxt", "bdateTxt"];
                 for (let i = 0; i < 3; i++) {
                     var disabled = document.getElementById(ids[i]).disabled;

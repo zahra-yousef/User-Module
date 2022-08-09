@@ -33,7 +33,7 @@
                  if ($row['user_name'] === $uname && $row['password'] === $pass) {
                     $_SESSION['user_name'] = $row['user_name'];
                     $_SESSION['first_name'] = $row['first_name'];
-                    $_SESSION['emai'] = $row['email'];
+                    $_SESSION['email'] = $row['email'];
                     $_SESSION['dob'] = $row['dob'];
                     $_SESSION['phone'] = $row['phone'];
 

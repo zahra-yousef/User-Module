@@ -131,7 +131,7 @@ div.icon{
     width: 100%
 }
 
-p.error, .success{
+p.error, p.success{
     background: #F2DEDE;
     color: #A94442;
     padding: 10px;
@@ -145,6 +145,18 @@ p.error, .success{
     background: #D4EDDA;
     color: #40754C;
 }
+
+.loginLink {
+	font-size: 16px;
+	display: block;
+	padding: 10px;
+	text-decoration: none;
+	color: #444;
+        text-align: center;
+}
+.loginLink:hover {
+	text-decoration: underline;
+} 
 
 button{
     font-size: 24px;
@@ -181,6 +193,7 @@ button.learnMore{
     background-color: #4BE69F;
     border-color: #4BE69F;
     margin-bottom: 5px;
+    margin-top:5px;
 } 
 
 button.loginButton{
@@ -229,11 +242,11 @@ input[type="date"]{
     border-radius: 7px;
 }
 
-.buttonLink{
+/*.buttonLink{
     text-decoration: none;
     color: #fff;
     display: inline-block;
-}
+}*/
 
 div.loginForm{
     display: inline-block;

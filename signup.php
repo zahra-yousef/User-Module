@@ -23,14 +23,14 @@
         $phone = validate($_POST["phone"]);
         
         $user_data = 'uname='. $uname. '&name='.$name
-                     .'&email='. $email. '&dob='.$dob.
-                    '&phone='.$phone;
+                     .'&email='. $email. '&dob='.$dob
+                     .'&phone='.$phone;
         
         if(empty($name)){
             header("Location: signup_form.php?error=Name is required!&$user_data");
             exit();  
         }else if (!preg_match("/^[a-zA-Z-' ]*$/",$name)) { // check if name only contains letters and whitespace
-            header("Location: signup_form.php?error=Only letters and white space allowed!");
+            header("Location: signup_form.php?error=Only letters and white space allowed!&$user_data");
             exit();
         }else if (empty($uname)) {
             header("Location: signup_form.php?error=Username is required!&$user_data");
