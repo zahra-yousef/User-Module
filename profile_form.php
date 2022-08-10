@@ -23,7 +23,7 @@
         </header>
         
         <div class="container">
-            <form action="#" method="post">
+            <form action="javascript:void(0);" method="post">
                 <div class="row">
                     <div class="col-0" id="formCenter">
                         <div class="loginForm">
@@ -76,13 +76,6 @@
 
                 <div class="row">
                     <div class="col-12">
-                        <button id="deleteButton" 
-                                class="learnMore" 
-                                name="deleteButton"
-                                type="submit"
-                                formaction="delete_form.php">
-                            Delete Account
-                        </button>
                         <button id="saveButton" 
                                 class="learnMore" 
                                 name="saveButton"
@@ -90,11 +83,22 @@
                                 formaction="profile.php">
                             Save Changes
                         </button>
+                         <button id="editButton" 
+                                class="learnMore" 
+                                name="editButton">
+                                Edit User
+                        </button>
+                        <button id="deleteButton" 
+                                class="learnMore" 
+                                name="deleteButton"
+                                type="submit"
+                                formaction="delete_form.php">
+                            Delete Account
+                        </button>
                     </div>
                 </div>
              </form> 
-                <button id="editButton" 
-                        class="learnMore" name="editButton">Edit User</button>
+           
         </div>
         
         <script>
