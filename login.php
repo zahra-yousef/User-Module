@@ -37,7 +37,7 @@
                     $_SESSION['dob'] = $row['dob'];
                     $_SESSION['phone'] = $row['phone'];
 
-                    header("Location: home_form.php");
+                    header("Location: index.php");
                     exit();
                  } else {
                     header("Location: login_form.php?error=Incorect User name or password");

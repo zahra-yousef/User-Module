@@ -1,3 +1,7 @@
+<?php 
+    session_start();
+    if(!isset($_SESSION['user_name'])){
+?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -111,3 +115,8 @@
         <?php include 'footer.php';?>
     </body>
 </html>
+<?php 
+    }else{
+        header("Location: index.php");
+        exit();
+}

@@ -66,7 +66,12 @@
                 $result2 = mysqli_query($conn, $sql2);
 
                 if ($result2) {
-                    header("Location: home_form.php");
+                    $_SESSION['user_name'] = $uname;
+                    $_SESSION['first_name'] = $name;
+                    $_SESSION['email'] = $row['email'];
+                    $_SESSION['dob'] = $row['dob'];
+                    $_SESSION['phone'] = $row['phone'];
+                    header("Location: index.php");
                     exit();
                 }else {
                     header("Location: signup_form.php?error=unknown error occurred&$user_data");
