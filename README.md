@@ -10,3 +10,7 @@ Here are details about the projet:
     3. I assigned the functionalities of these pages using several PHP scripts.
     4. Each page has inputs element is designed with validation functionalities.
     5. I considered desining a responsive pages. 
+
+Credintials
+Username: noor1
+Password: 1234
