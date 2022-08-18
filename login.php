@@ -31,14 +31,22 @@
                 $row = mysqli_fetch_assoc($result);
 
                  if ($row['user_name'] === $uname && $row['password'] === $pass) {
+                    $_SESSION['id'] = $row['id'];
                     $_SESSION['user_name'] = $row['user_name'];
                     $_SESSION['first_name'] = $row['first_name'];
                     $_SESSION['email'] = $row['email'];
                     $_SESSION['dob'] = $row['dob'];
                     $_SESSION['phone'] = $row['phone'];
-
-                    header("Location: index.php");
-                    exit();
+                    $_SESSION['user_type'] = $row['user_type'];
+                    $_SESSION['status'] = $row['status'];
+                    
+                    if($_SESSION['user_type'] == "admin"){
+                        header("Location: test_form.php");
+                        exit();
+                    }else if($_SESSION['user_type'] == "user"){
+                        header("Location: index.php");
+                        exit();
+                    }
                  } else {
                     header("Location: login_form.php?error=Incorect User name or password");
                     exit();

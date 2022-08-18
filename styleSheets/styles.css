@@ -13,6 +13,8 @@ label{
     font-size: 28px;
     font-weight:600; /*level of Bold*/
     line-height: 1.5;
+    margin-left: 5%;
+    margin-right: 5%;
 }
 
 p{
@@ -23,7 +25,7 @@ p{
 .container{
     width: 100%;
     margin: auto; /*to center the content inside the container*/
-    padding-top: 4%;
+    padding-top: 2%;
     padding-bottom: 8%;
 }
 
@@ -127,28 +129,43 @@ div.box{
         0 2px 3px 0 rgba(0,0,0,.1); /*https://www.cssmatic.com/box-shadow*/
 }
 
-div.icon{ 
-    width: 100%
+div.loginForm div.icon{
+    width: 400px;
+    margin-right: 0px;
+}
+
+div.loginForm div.icon img{
+    height: 150px;
+    width: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-left: 20%;
+    margin-bottom: 20px;
 }
 
 p.error{
     background: #F2DEDE;
     color: #A94442;
     padding: 10px;
-    width: 100%;
+    width: 400px;
     border-radius: 5px;
     margin: 0;
     font-size: 20px;
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-bottom: 15px;
 }
 
 p.success{
     background: #D4EDDA;
     color: #40754C;
     padding: 10px;
-    width: 100%;
+    width: 400px;
     border-radius: 5px;
-    margin: 0;
     font-size: 20px;
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-bottom: 15px;
 }
 
 .loginLink {
@@ -224,8 +241,7 @@ form h2{
 
 /*for input type of text*/
 input[type="text"],
-input[type="password"],
-profilebox{
+input[type="password"]{ /*or .profilebox*/
     font-size: 20px;
     width: 400px;
     min-width: 100px;
@@ -233,12 +249,20 @@ profilebox{
     border-radius: 7px;
 }
 
-profilebox{
-    margin-left: 20%;
-    margin-right: 20%;
+
+div.loginForm input.profilebox0{
+   font-size: 20px;
+   width: 400px;
+   min-width: 100px;
+   padding:12px 32px;
+   border-radius: 7px;
 }
 
-/*for input type of text*/
+.profilebox, profilebox0{
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
 input[type="date"]{
     font-size: 20px;
     width: 400px;
@@ -247,12 +271,6 @@ input[type="date"]{
     border-radius: 7px;
 }
 
-/*.buttonLink{
-    text-decoration: none;
-    color: #fff;
-    display: inline-block;
-}*/
-
 div.loginForm{
     display: inline-block;
 }
@@ -260,6 +278,7 @@ div.loginForm{
 #formCenter{
     position: relative; 
     margin: auto;
+    margin-bottom: 28px;
 }
 
 footer.myFooter{
@@ -343,10 +362,6 @@ footer.myFooter ul li{
     div.rightSide-col,
     form{
        margin: 15px;
-    }
-    
-    input[type="text"]{
-/*        width: 350px; Change it */
     }
     
     .videoContainer iframe, div.loginForm{ /*to position the video in the center ato position the video in the nd take the size of the screen*/

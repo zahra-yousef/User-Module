@@ -1,9 +1,6 @@
 <?php
     session_start();
-
     include "connection.php";
-
-    $uname = $name = $email = $dob = $pass = $cpass = $phone = "";
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         
@@ -50,27 +47,42 @@
                 . "match&$user_data");
             exit();
         }else{
-            echo $phone. '  '. $dob;
+            if($dob == '1970-01-01'){
+                $dob = '';
+            }
+            if(empty ($phone)){
+                $phone = '';
+            }
+            $image = '';
+            $user_type = '';
+            
             //hashing the password
             $pass = md5($pass); 
             $sql = "SELECT * FROM users WHERE user_name = '$uname'";
             $result = mysqli_query($conn, $sql);
-
+           
+            echo $user_data . "new: dob " .$dob. "phone : ".$phone ;
+            
             if(mysqli_num_rows($result) > 0){
                 header("Location: signup_form.php?error=The username is taken try another "
                     . "&$user_data");
                 exit();
             }else{
-                $sql2 = "INSERT INTO users(user_name, email, password, dob, first_name, phone) "
-                        . "VALUES('$uname', '$email', '$pass', '$dob', '$name', '$phone')";
-                $result2 = mysqli_query($conn, $sql2);
+                $status = 1;
+                $sql2 = "INSERT INTO `users` (`user_name`, `email`, `password`, `dob`, `first_name`, `phone`, `image`, `user_type`, `status`) 
+                         VALUES ('$uname', '$email', '$pass', NULLIF('$dob', ''), '$name', NULLIF('$phone', ''), NULLIF('$image', ''), NULLIF('$user_type', ''), '$status')";
 
+                $result2 = mysqli_query($conn, $sql2);
+                
                 if ($result2) {
+                    $_SESSION['id'] = 3;
                     $_SESSION['user_name'] = $uname;
                     $_SESSION['first_name'] = $name;
-                    $_SESSION['email'] = $row['email'];
-                    $_SESSION['dob'] = $row['dob'];
-                    $_SESSION['phone'] = $row['phone'];
+                    $_SESSION['email'] = $email;
+                    $_SESSION['dob'] = $dob;
+                    $_SESSION['phone'] = $phone;
+                    $_SESSION['status'] = $status;
+                    echo 'updated';
                     header("Location: index.php");
                     exit();
                 }else {

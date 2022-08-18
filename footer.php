@@ -3,7 +3,6 @@
     <head>
         <meta charset="UTF-8">
         <title>NewTech - Footer</title>
-        <link rel="stylesheet" href="styleSheets/styles.css">
     </head>
     <body>
         <footer class="myFooter">

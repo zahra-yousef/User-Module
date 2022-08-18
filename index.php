@@ -2,7 +2,7 @@
     session_start();
     if(isset($_SESSION['user_name']) && isset($_SESSION['first_name'])
         && isset($_SESSION['email']) && isset($_SESSION['dob'])
-        && isset($_SESSION['phone']) ){
+        && isset($_SESSION['phone']) && isset($_SESSION['id'])){
 ?>
 
 <!DOCTYPE html>

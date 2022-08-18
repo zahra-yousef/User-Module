@@ -1,6 +1,6 @@
 <?php 
     session_start();
-    if(!isset($_SESSION['user_name'])){
+    if(!isset($_SESSION['user_name']) || $_SESSION['status'] == 0){
 ?>
 
 <!DOCTYPE html>
@@ -8,10 +8,6 @@
     <head>
         <meta charset="UTF-8">
         <title>NewTech - Login</title>
-        <link rel="stylesheet" href="styleSheets/styles.css">
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet">
     </head>
     <body>
         <?php include 'header.php';?>

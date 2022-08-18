@@ -2,7 +2,10 @@
     session_start();
     if(isset($_SESSION['user_name']) && isset($_SESSION['first_name'])
       && isset($_SESSION['email']) && isset($_SESSION['dob'])
-      && isset($_SESSION['phone'])  ){
+      && isset($_SESSION['phone']) && isset($_SESSION['id'])){
+        
+        $user_id = $_SESSION['id'];
+        include "connection.php";
 ?>
 <!DOCTYPE html>
 
@@ -10,10 +13,6 @@
     <head>
         <meta charset="UTF-8">
         <title>NewTech - Profile</title>
-        <link rel="stylesheet" href="styleSheets/styles.css">
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet">
     </head>
     <body>
         <?php include 'header.php';?>
@@ -23,12 +22,23 @@
         </header>
         
         <div class="container">
-            <form action="javascript:void(0);" method="post">
+            <form action="javascript:void(0);" method="post" enctype="multipart/form-data">
                 <div class="row">
                     <div class="col-0" id="formCenter">
                         <div class="loginForm">
                             <div class="icon">
-                                <img src="images/user.png">
+                                <?php
+                                    $select = mysqli_query($conn, "SELECT * FROM `users` WHERE id = '$user_id'") 
+                                            or die('query failed');
+                                    if(mysqli_num_rows($select) > 0){
+                                       $fetch = mysqli_fetch_assoc($select);
+                                    }
+                                    if($fetch['image'] == ''){
+                                       echo '<img src="images/user.png">';
+                                    }else{
+                                       echo '<img src="uploaded_img/'.$fetch['image'].'">';
+                                    }
+                                ?>
                             </div>
 
                             <?php if(isset($_GET['error'])) { ?> 
@@ -69,11 +79,17 @@
                                    name="dob" 
                                    type="text" 
                                    value="<?php echo $_SESSION['dob'];?>"
-                                   disabled><br><br> 
+                                   disabled><br><br>
+                            
+                            <label>Choose image:</label>
+                            <input id="imgTxt"
+                                class="profilebox0"
+                                name="profile_image"
+                                type="file"
+                                accept="image/jpg, image/jpeg, image/png"/>
                         </div>
                     </div>
                 </div>
-
                 <div class="row">
                     <div class="col-12">
                         <button id="saveButton" 
@@ -83,7 +99,7 @@
                                 formaction="profile.php">
                             Save Changes
                         </button>
-                         <button id="editButton" 
+                        <button id="editButton" 
                                 class="learnMore" 
                                 name="editButton">
                                 Edit User
@@ -98,7 +114,6 @@
                     </div>
                 </div>
              </form> 
-           
         </div>
         
         <script>
@@ -108,7 +123,7 @@
             document.getElementById('editButton').onclick = function(){
                 document.getElementById("editButton").style.display = "none";
                 document.getElementById("saveButton").style.display = "block";
-                const ids = ["nameTxt", "emailTxt", "phoneTxt", "bdateTxt"];
+                const ids = ["nameTxt", "emailTxt", "phoneTxt", "bdateTxt", "imgTxt"];
                 for (let i = 0; i < 3; i++) {
                     var disabled = document.getElementById(ids[i]).disabled;
 
