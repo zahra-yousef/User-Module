@@ -14,13 +14,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $pass = validate($_POST["password"]);
     $email = validate($_POST["email"]);
     $uname = $_SESSION['user_name'];
-            
-    $user_data = 'uname='. $uname
-                .'&email='. $email
-                .'&password='.$pass;
 
     if(empty($email)){
-        header("Location: delete_form.php?error=Email is required!&$user_data");
+        header("Location: delete_form.php?error=Email is required!");
         exit();
     }else if (empty($pass)) {
         header("Location: delete_form.php?error=Password is required!");

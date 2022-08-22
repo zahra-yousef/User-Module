@@ -1,7 +1,7 @@
 <?php 
     session_start();
-    if(isset($_SESSION['user_name']) 
-      && isset($_SESSION['email'])){
+    if(isset($_SESSION['user_name']) && isset($_SESSION['email'])){
+        if ($_SESSION['user_type'] == "User" && $_SESSION['status'] == 1){
 ?>
 
 <!DOCTYPE html>
@@ -67,6 +67,15 @@
     </body>
 </html>
 <?php 
+        }else{
+            if ($_SESSION['user_type'] == "Admin" && $_SESSION['status'] == 1){
+                header("Location: admin_form.php");
+                exit();
+            }else{
+                $e_msg = "User forbidden from accessing this webpage.";
+                echo "<script type='text/javascript'>alert('$e_msg');</script>";
+            } 
+        }
     }else{
         header("Location: login_form.php");
         exit();

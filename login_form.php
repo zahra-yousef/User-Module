@@ -1,6 +1,6 @@
 <?php 
     session_start();
-    if(!isset($_SESSION['user_name']) || $_SESSION['status'] == 0){
+    if(!isset($_SESSION['user_name'])){ 
 ?>
 
 <!DOCTYPE html>

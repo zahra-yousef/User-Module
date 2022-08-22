@@ -9,12 +9,14 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         $data = htmlspecialchars($data);
         return $data;
     }
-
-    $name = validate($_POST["name"]);
+    
+    $uid = $_REQUEST['uid'];
+    $uname = validate($_POST["uname"]);  
     $email = validate($_POST["email"]);
+    $name = validate($_POST["name"]);
     $phone = validate($_POST["phone"]);
-    $uname = $_SESSION['user_name'];
-
+    $utype = validate($_POST["utype"]);
+    
     $update_image = $_FILES['profile_image']['name'];
     $update_image_size = $_FILES['profile_image']['size'];
     $update_image_tmp_name = $_FILES['profile_image']['tmp_name'];
@@ -24,34 +26,42 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     $allowedTypes = array(IMAGETYPE_PNG, IMAGETYPE_JPEG);
     $detectedType = exif_imagetype($update_image_tmp_name);
     $error = !in_array($detectedType, $allowedTypes);
-
-    if(empty($name)){
-        header("Location: profile_form.php?error=Name is required!");
+    
+    if(empty($uname)){
+        header("Location: editUser_form.php?id=$uid&error=Name is empty!");
         exit();
     }else if(empty($email)){
-        header("Location: profile_form.php?error=Email is required!");
+        header("Location: editUser_form.php?id=$uid&error=Email is empty!");
+        exit();
+    }else if(empty($name)){
+        header("Location: editUser_form.php?id=$uid&error=Name is empty!");
         exit();
     }else if (empty($phone)) {
-        header("Location: profile_form.php?error=Phone is required!");
+        header("Location: editUser_form.php?id=$uid&error=Phone is empty!");
+        exit();
+    }else if (empty($utype)) {
+        header("Location: editUser_form.php?id=$uid&error=User type is empty!");
         exit();
     }else{
-        $sql = "SELECT * FROM users WHERE user_name = '$uname'";
+        $sql = "SELECT * FROM users WHERE id = '$uid'";
         $result = mysqli_query($conn, $sql);
-
         if(mysqli_num_rows($result) === 1){
-            $sql = "UPDATE `users` SET email='$email', first_name ='$name', phone='$phone' WHERE user_name='$uname'";
-            if (mysqli_query($conn, $sql)) {
-                $_SESSION['first_name'] = $name;
-                $_SESSION['email'] = $email;
-                $_SESSION['phone'] = $phone;
-                
-                 if(!empty($update_image)){
+            $sql2 = "UPDATE users SET "
+                     . "user_name='$uname', "
+                     . "email='$email', "
+                     . "first_name ='$name', "
+                     . "phone='$phone', "
+                     . "user_type='$utype' "
+                     . "WHERE id='$uid'";
+
+            if (mysqli_query($conn, $sql2)) {
+                if(!empty($update_image)){
                     $error = !in_array($detectedType, $allowedTypes);
                     if($update_image_size > 2000000){
-                        header("Location: profile_form.php?error=Image is too large.");
+                        header("Location: editUser_form.php?error=Image is too large.");
                         exit();
                     }else if($error == 1) {
-                        header("Location: profile_form.php?error=Sorry, only JPG, JPEG and PNG files are allowed.");
+                        header("Location: editUser_form.php?error=Sorry, only JPG, JPEG and PNG files are allowed.");
                         exit();
                     }else{
                         $image_update_query = mysqli_query($conn, "UPDATE `users` SET image = '$update_image' WHERE user_name = '$uname'") 
@@ -59,19 +69,22 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                         if($image_update_query){
                             move_uploaded_file($update_image_tmp_name, $update_image_folder);
                         }
-                        header("Location: profile_form.php?success=Account information updated succesfully.");
+                        header("Location: editUser_form.php?id=$uid&success=Account information updated succesfully.");
                         exit();
                     }
                 }
-                header("Location: profile_form.php?success=Account information updated succesfully.");
+                header("Location: editUser_form.php?id=$uid&success=User information updated succesfully.");
                 exit();
-            } else {
-                header("Location: profile_form.php?error=Error updating account info.");
+            }else{
+                header("Location: editUser_form.php?id=$uid&error=User information are not updated succesfully.");
                 exit();
             }
         }else{
-            header("Location: profile_form.php?error=Your information are invalid!");
+            header("Location: editUser_form.php?id=$uid&error=User does not exist.");
             exit();
         }
     }
 }
+
+
+

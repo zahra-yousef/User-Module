@@ -3,6 +3,8 @@
     if(isset($_SESSION['user_name']) && isset($_SESSION['first_name'])
         && isset($_SESSION['email']) && isset($_SESSION['dob'])
         && isset($_SESSION['phone']) && isset($_SESSION['id'])){
+        
+        if ($_SESSION['user_type'] == "User" && $_SESSION['status'] == 1){             
 ?>
 
 <!DOCTYPE html>
@@ -10,11 +12,7 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>NewTech - Home</title>
-        <link rel="stylesheet" href="styleSheets/styles.css">
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet">
+        <title>NewTech - Home</title>      
     </head>
     <body>
         <?php include 'header.php';?>
@@ -79,7 +77,16 @@
         <?php include 'footer.php';?>
     </body>
 </html>
-<?php 
+<?php
+        }else{
+            if ($_SESSION['user_type'] == "Admin" && $_SESSION['status'] == 1){
+                header("Location: admin_form.php");
+                exit();
+            }else{
+                $e_msg = "User forbidden from accessing this webpage.";
+                echo "<script type='text/javascript'>alert('$e_msg');</script>";
+            } 
+        }
     }else{
         header("Location: login_form.php");
         exit();

@@ -40,10 +40,10 @@
                     $_SESSION['user_type'] = $row['user_type'];
                     $_SESSION['status'] = $row['status'];
                     
-                    if($_SESSION['user_type'] == "admin"){
-                        header("Location: test_form.php");
+                    if($_SESSION['user_type'] == "Admin"){
+                        header("Location: admin_form.php");
                         exit();
-                    }else if($_SESSION['user_type'] == "user"){
+                    }else if($_SESSION['user_type'] == "User"){
                         header("Location: index.php");
                         exit();
                     }

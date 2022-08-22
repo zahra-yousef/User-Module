@@ -17,9 +17,15 @@
                 <li><a href="#news">Techno</a></li>
                 <li><a href="#contact">Contact</a></li>
                 <li><a href="#about">About</a></li>
-                <li id="profile-tab" class="top-nav-right"><a href="profile_form.php">Profile</a></li>                
-                <li id="logout-tab" class="top-nav-right"><a href="logout.php">Logout</a></li>
-                <li class="dropdownIcon"><a href="javascript:void(0);" onclick="dropdownMenu()">&#9776;</a></li>
+                <li id="profile-tab" class="top-nav-right">
+                    <a href="profile_form.php">Profile</a>
+                </li>                
+                <li id="logout-tab" class="top-nav-right">
+                    <a href="logout.php">Logout</a>
+                </li>
+                <li class="dropdownIcon">
+                    <a href="javascript:void(0);" onclick="dropdownMenu()">&#9776;</a>
+                </li>
             </ul>
         </nav>
         

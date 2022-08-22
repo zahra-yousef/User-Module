@@ -4,6 +4,8 @@
       && isset($_SESSION['email']) && isset($_SESSION['dob'])
       && isset($_SESSION['phone']) && isset($_SESSION['id'])){
         
+        if ($_SESSION['user_type'] == "User" && $_SESSION['status'] == 1){
+        
         $user_id = $_SESSION['id'];
         include "connection.php";
 ?>
@@ -31,12 +33,12 @@
                                     $select = mysqli_query($conn, "SELECT * FROM `users` WHERE id = '$user_id'") 
                                             or die('query failed');
                                     if(mysqli_num_rows($select) > 0){
-                                       $fetch = mysqli_fetch_assoc($select);
+                                       $row = mysqli_fetch_assoc($select);
                                     }
-                                    if($fetch['image'] == ''){
+                                    if($row['image'] == ''){
                                        echo '<img src="images/user.png">';
                                     }else{
-                                       echo '<img src="uploaded_img/'.$fetch['image'].'">';
+                                       echo '<img src="uploaded_img/'.$row['image'].'">';
                                     }
                                 ?>
                             </div>
@@ -86,7 +88,8 @@
                                 class="profilebox0"
                                 name="profile_image"
                                 type="file"
-                                accept="image/jpg, image/jpeg, image/png"/>
+                                accept="image/jpg, image/jpeg, image/png"
+                                disabled>
                         </div>
                     </div>
                 </div>
@@ -124,7 +127,7 @@
                 document.getElementById("editButton").style.display = "none";
                 document.getElementById("saveButton").style.display = "block";
                 const ids = ["nameTxt", "emailTxt", "phoneTxt", "bdateTxt", "imgTxt"];
-                for (let i = 0; i < 3; i++) {
+                for (let i = 0; i < ids.length; i++) {
                     var disabled = document.getElementById(ids[i]).disabled;
 
                     if (disabled) {
@@ -141,6 +144,15 @@
     </body>
 </html>
 <?php 
+        }else{
+            if ($_SESSION['user_type'] == "Admin" && $_SESSION['status'] == 1){
+                header("Location: admin_form.php");
+                exit();
+            }else{
+                $e_msg = "User forbidden from accessing this webpage.";
+                echo "<script type='text/javascript'>alert('$e_msg');</script>";
+            } 
+        }
     }else{
         header("Location: login_form.php");
         exit();

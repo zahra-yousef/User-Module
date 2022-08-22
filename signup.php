@@ -18,11 +18,15 @@
         $pass = validate($_POST["password"]);
         $cpass = validate($_POST["cpassword"]);
         $phone = validate($_POST["phone"]);
+        $user_type = validate($_POST["utype"]);
         
-        $user_data = 'uname='. $uname. '&name='.$name
-                     .'&email='. $email. '&dob='.$dob
-                     .'&phone='.$phone;
-        
+//        if(!empty($_POST["adminChbx"])){
+//            $user_type = validate($_POST["adminChbx"]);
+//            echo $user_type;
+//        } else {
+//            $user_type = "User";
+//        }
+
         if(empty($name)){
             header("Location: signup_form.php?error=Name is required!&$user_data");
             exit();  
@@ -54,14 +58,11 @@
                 $phone = '';
             }
             $image = '';
-            $user_type = '';
             
             //hashing the password
             $pass = md5($pass); 
             $sql = "SELECT * FROM users WHERE user_name = '$uname'";
             $result = mysqli_query($conn, $sql);
-           
-            echo $user_data . "new: dob " .$dob. "phone : ".$phone ;
             
             if(mysqli_num_rows($result) > 0){
                 header("Location: signup_form.php?error=The username is taken try another "
@@ -75,16 +76,25 @@
                 $result2 = mysqli_query($conn, $sql2);
                 
                 if ($result2) {
-                    $_SESSION['id'] = 3;
+                    $sql3 = "SELECT * FROM users WHERE user_name = '$uname'";
+                    $result = mysqli_query($conn, $sql);
+                    $row = mysqli_fetch_assoc($result);
+                    $_SESSION['id'] = $row['id'];
+                    
                     $_SESSION['user_name'] = $uname;
                     $_SESSION['first_name'] = $name;
                     $_SESSION['email'] = $email;
                     $_SESSION['dob'] = $dob;
                     $_SESSION['phone'] = $phone;
                     $_SESSION['status'] = $status;
-                    echo 'updated';
-                    header("Location: index.php");
-                    exit();
+                    
+                    if($user_type == "user"){
+                        header("Location: index.php");
+                        exit();
+                    } else {
+                        header("Location: admin_form.php");
+                        exit();
+                    } 
                 }else {
                     header("Location: signup_form.php?error=unknown error occurred&$user_data");
                     exit();
