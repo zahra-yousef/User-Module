@@ -1,6 +1,6 @@
 <?php 
     session_start();
-    if(!isset($_SESSION['user_name'])){
+    if(!isset($_SESSION['user_name']) && !isset($_SESSION['user_type'])){
 ?>
 <!DOCTYPE html>
 <html>
@@ -118,6 +118,11 @@
 </html>
 <?php 
     }else{
-        header("Location: index.php");
-        exit();
+       if($_SESSION['user_type'] == 'User'){
+            header("Location: index.php");
+            exit(); 
+        }else if($_SESSION['user_type'] == 'Admin'){
+            header("Location: admin_form.php");
+            exit(); 
+        }
 }

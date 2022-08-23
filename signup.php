@@ -19,6 +19,11 @@
         $cpass = validate($_POST["cpassword"]);
         $phone = validate($_POST["phone"]);
         $utype = validate($_POST["utype"]);
+        
+        $user_data = 'uname='. $uname. '&name='.$name
+                     .'&email='. $email. '&dob='.$dob
+                     .'&phone='.$phone;    
+
 
         if(empty($name)){
             header("Location: signup_form.php?error=Name is required!&$user_data");
@@ -69,8 +74,8 @@
                 $result2 = mysqli_query($conn, $sql2);
                 
                 if ($result2) {
-//                    $sql3 = "SELECT * FROM users WHERE user_name = '$uname'";
-//                    $result = mysqli_query($conn, $sql);
+                    $sql3 = "SELECT * FROM users WHERE user_name = '$uname'";
+                    $result = mysqli_query($conn, $sql);
                     $row = mysqli_fetch_assoc($result);
                     $_SESSION['id'] = $row['id'];
                     
