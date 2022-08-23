@@ -1,10 +1,9 @@
 <?php 
     session_start();
-    include "connection.php";
-    if(isset($_SESSION['user_name']) && isset($_SESSION['first_name'])
-      && isset($_SESSION['email']) && isset($_SESSION['dob'])
-      && isset($_SESSION['phone']) && isset($_SESSION['id'])){
+    if(isset($_SESSION['id'])){
 
+        include "query_user.php";
+        
         if ($_SESSION['user_type'] == "Admin" && $_SESSION['status'] == 1){
             if(isset($_REQUEST['id'])){
                 $id = $_REQUEST['id'];

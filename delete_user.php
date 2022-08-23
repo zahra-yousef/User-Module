@@ -13,7 +13,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $pass = validate($_POST["password"]);
     $email = validate($_POST["email"]);
-    $uname = $_SESSION['user_name'];
+    $id = $_SESSION['id'];
 
     if(empty($email)){
         header("Location: delete_form.php?error=Email is required!");
@@ -23,14 +23,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         exit();
     }else{
         $pass = md5($pass); 
-        $sql = "SELECT * FROM users WHERE user_name = '$uname' "
+        $sql = "SELECT * FROM users WHERE id = '$id' "
                . "AND password = '$pass' AND email = '$email'";
         $result = mysqli_query($conn, $sql);
 
         if(mysqli_num_rows($result) === 1){
-            $sql = "DELETE FROM users WHERE user_name='$uname'";
+            $sql = "DELETE FROM users WHERE id='$id'";
             if (mysqli_query($conn, $sql)) {
-                header("Location: delete_form.php?success=Account deleted succesfully");
+                header("Location: delete_form.php?success=Account deleted succesfully"); 
                 exit();
             } else {
                 header("Location: delete_form.php?error=Error deleting account");

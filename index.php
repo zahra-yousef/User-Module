@@ -1,10 +1,10 @@
 <?php 
     session_start();
-    if(isset($_SESSION['user_name']) && isset($_SESSION['first_name'])
-        && isset($_SESSION['email']) && isset($_SESSION['dob'])
-        && isset($_SESSION['phone']) && isset($_SESSION['id'])){
+    if(isset($_SESSION['id'])){
         
-        if ($_SESSION['user_type'] == "User" && $_SESSION['status'] == 1){             
+        include "query_user.php";
+        
+        if ($_SESSION['user_type'] == "User" && $_SESSION['status'] == 1){  
 ?>
 
 <!DOCTYPE html>
@@ -80,9 +80,9 @@
 <?php
         }else{
             if ($_SESSION['user_type'] == "Admin" && $_SESSION['status'] == 1){
-                header("Location: admin_form.php");
+                header("Location: logout.php");
                 exit();
-            }else{
+            }else if($_SESSION['status'] == 0){
                 $e_msg = "User forbidden from accessing this webpage.";
                 echo "<script type='text/javascript'>alert('$e_msg');</script>";
             } 

@@ -99,16 +99,12 @@
                                    placeholder="Re-Enter password">
                             <br><br>
                             
-                            <h2>User Type: </h2><br>
+                            <h2>User Type: </h2>
                             <select id="usersSelect" 
                                     name="utype">
                                 <option value="User">Normal User</option>
                                 <option value="Admin">Admin</option>
                             </select><br><br>
-                            
-                            <input type="checkbox" id="adminCheckbox" name="adminChbx" value="Admin">
-                            <label for="adminChbx"> This is an admin</label><br>
-                            
                             <button type="submit" class="loginButton">Submit</button>
                         </div>
                     </form>

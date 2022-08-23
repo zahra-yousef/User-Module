@@ -1,6 +1,9 @@
 <?php 
     session_start();
-    if(isset($_SESSION['user_name']) && isset($_SESSION['email'])){
+    if(isset($_SESSION['id'])){
+        
+        include "query_user.php";
+        
         if ($_SESSION['user_type'] == "User" && $_SESSION['status'] == 1){
 ?>
 
@@ -22,7 +25,6 @@
             <form action="delete_user.php" method="post">
                 <div class="row">
                     <div class="col-0" id="formCenter">
-                        <!--<div class="box">-->
                         <div class="loginForm">
                             <div class="icon">
                                 <img src="images/user.png">
@@ -51,8 +53,7 @@
                                    type="password" 
                                    placeholder="Enter your password"
                                     ><br><br>
-                        </div>  
-                        <!--</div>-->              
+                        </div>              
                     </div>
                 </div>
 
@@ -69,9 +70,9 @@
 <?php 
         }else{
             if ($_SESSION['user_type'] == "Admin" && $_SESSION['status'] == 1){
-                header("Location: admin_form.php");
+                header("Location: logout.php");
                 exit();
-            }else{
+            }else if($_SESSION['status'] == 0){
                 $e_msg = "User forbidden from accessing this webpage.";
                 echo "<script type='text/javascript'>alert('$e_msg');</script>";
             } 

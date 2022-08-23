@@ -19,7 +19,7 @@ if($status == -1){ //delete
     $status = 0;
     $sql = "UPDATE users SET status='$status' WHERE id='$id'";
     if (mysqli_query($conn, $sql)) {
-        header("Location: admin_form.php?error=Error deleting account");
+        header("Location: admin_form.php?success=Account blocked succesfully");
         exit();
     }
 }

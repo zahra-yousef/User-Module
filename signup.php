@@ -18,14 +18,7 @@
         $pass = validate($_POST["password"]);
         $cpass = validate($_POST["cpassword"]);
         $phone = validate($_POST["phone"]);
-        $user_type = validate($_POST["utype"]);
-        
-//        if(!empty($_POST["adminChbx"])){
-//            $user_type = validate($_POST["adminChbx"]);
-//            echo $user_type;
-//        } else {
-//            $user_type = "User";
-//        }
+        $utype = validate($_POST["utype"]);
 
         if(empty($name)){
             header("Location: signup_form.php?error=Name is required!&$user_data");
@@ -71,13 +64,13 @@
             }else{
                 $status = 1;
                 $sql2 = "INSERT INTO `users` (`user_name`, `email`, `password`, `dob`, `first_name`, `phone`, `image`, `user_type`, `status`) 
-                         VALUES ('$uname', '$email', '$pass', NULLIF('$dob', ''), '$name', NULLIF('$phone', ''), NULLIF('$image', ''), NULLIF('$user_type', ''), '$status')";
+                         VALUES ('$uname', '$email', '$pass', NULLIF('$dob', ''), '$name', NULLIF('$phone', ''), NULLIF('$image', ''), NULLIF('$utype', ''), '$status')";
 
                 $result2 = mysqli_query($conn, $sql2);
                 
                 if ($result2) {
-                    $sql3 = "SELECT * FROM users WHERE user_name = '$uname'";
-                    $result = mysqli_query($conn, $sql);
+//                    $sql3 = "SELECT * FROM users WHERE user_name = '$uname'";
+//                    $result = mysqli_query($conn, $sql);
                     $row = mysqli_fetch_assoc($result);
                     $_SESSION['id'] = $row['id'];
                     
@@ -87,8 +80,9 @@
                     $_SESSION['dob'] = $dob;
                     $_SESSION['phone'] = $phone;
                     $_SESSION['status'] = $status;
+                    $_SESSION['user_type'] = $utype;
                     
-                    if($user_type == "user"){
+                    if($utype  == "User"){
                         header("Location: index.php");
                         exit();
                     } else {

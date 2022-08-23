@@ -5,9 +5,10 @@
         <group>
             <file>file:/C:/wamp64/www/1st_Task_UserModule/admin_form.php</file>
             <file>file:/C:/wamp64/www/1st_Task_UserModule/editUser_form.php</file>
-            <file>file:/C:/wamp64/www/1st_Task_UserModule/edit_user.php</file>
-            <file>file:/C:/wamp64/www/1st_Task_UserModule/profile_form.php</file>
-            <file>file:/C:/wamp64/www/1st_Task_UserModule/admin.php</file>
+            <file>file:/C:/wamp64/www/1st_Task_UserModule/signup.php</file>
+            <file>file:/C:/wamp64/www/1st_Task_UserModule/signup_form.php</file>
+            <file>file:/C:/wamp64/www/1st_Task_UserModule/login_form.php</file>
+            <file>file:/C:/wamp64/www/1st_Task_UserModule/index.php</file>
         </group>
     </open-files>
 </project-private>

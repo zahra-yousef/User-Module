@@ -1,10 +1,8 @@
 <?php 
     session_start();
-    include "connection.php";
-    if(isset($_SESSION['user_name']) && isset($_SESSION['first_name'])
-      && isset($_SESSION['email']) && isset($_SESSION['dob'])
-      && isset($_SESSION['phone']) && isset($_SESSION['id'])){
-       
+    if(isset($_SESSION['id'])){
+
+        include "query_user.php";
         
         if ($_SESSION['user_type'] == "Admin" && $_SESSION['status'] == 1){
 ?>
@@ -36,8 +34,8 @@
                             </thead>
                             <tbody>
                                 <?php
-                                    $sel_query="Select * from users ORDER BY id ASC;";
-                                    $result = mysqli_query($conn,$sel_query);
+                                    $query="Select * from users ORDER BY id ASC;";
+                                    $result = mysqli_query($conn,$query);
                                     while($row = mysqli_fetch_assoc($result)) { ?>
                                         <tr>
                                             <td align="center"><?php echo $row["id"]; ?></td>
@@ -46,13 +44,13 @@
                                             <td align="center"><?php echo $row["status"]; ?></td>
 
                                             <td align="center">
-                                                <a href="editUser_form.php?id=<?php echo $row["id"]; ?>">Edit</a>
+                                                <a href="editUser_form.php?id=<?php echo rawurlencode($row["id"]); ?>">Edit</a>
                                             </td>
                                             <td align="center">
-                                                <a href="admin.php?id=<?php echo $row["id"]; ?>&status=-1">Delete</a>
+                                                <a href="admin.php?id=<?php echo rawurlencode($row["id"]); ?>&status=-1">Delete</a>
                                             </td>
                                             <td id="block<?php echo $row["id"]; ?>" align="center">
-                                                <a href="admin.php?id=<?php echo $row["id"]; ?>&status=<?php echo $row["status"]; ?>">Block</a>
+                                                <a href="admin.php?id=<?php echo rawurlencode($row["id"]); ?>&status=<?php echo $row["status"]; ?>">Block</a>
                                             </td>
                                         </tr>
                                 <?php } ?>
@@ -89,7 +87,7 @@
 <?php 
         }else{
             if ($_SESSION['user_type'] == "User" && $_SESSION['status'] == 1){
-                header("Location: login_form.php");
+                header("Location: logout.php");
                 exit();
             }else if($_SESSION['status'] == 0){
                 $e_msg = "User forbidden from accessing this webpage.";

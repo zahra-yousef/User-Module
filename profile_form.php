@@ -1,13 +1,10 @@
 <?php 
     session_start();
-    if(isset($_SESSION['user_name']) && isset($_SESSION['first_name'])
-      && isset($_SESSION['email']) && isset($_SESSION['dob'])
-      && isset($_SESSION['phone']) && isset($_SESSION['id'])){
+    if(isset($_SESSION['id'])){
+        
+        include "query_user.php";
         
         if ($_SESSION['user_type'] == "User" && $_SESSION['status'] == 1){
-        
-        $user_id = $_SESSION['id'];
-        include "connection.php";
 ?>
 <!DOCTYPE html>
 
@@ -30,15 +27,10 @@
                         <div class="loginForm">
                             <div class="icon">
                                 <?php
-                                    $select = mysqli_query($conn, "SELECT * FROM `users` WHERE id = '$user_id'") 
-                                            or die('query failed');
-                                    if(mysqli_num_rows($select) > 0){
-                                       $row = mysqli_fetch_assoc($select);
-                                    }
-                                    if($row['image'] == ''){
+                                    if($_SESSION['image'] == ''){
                                        echo '<img src="images/user.png">';
                                     }else{
-                                       echo '<img src="uploaded_img/'.$row['image'].'">';
+                                       echo '<img src="uploaded_img/'.$_SESSION['image'].'">';
                                     }
                                 ?>
                             </div>
@@ -146,9 +138,9 @@
 <?php 
         }else{
             if ($_SESSION['user_type'] == "Admin" && $_SESSION['status'] == 1){
-                header("Location: admin_form.php");
+                header("Location: logout.php");
                 exit();
-            }else{
+            }else if($_SESSION['status'] == 0){
                 $e_msg = "User forbidden from accessing this webpage.";
                 echo "<script type='text/javascript'>alert('$e_msg');</script>";
             } 
