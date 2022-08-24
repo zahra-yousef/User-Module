@@ -19,6 +19,9 @@
             <div class="row">
                 <div class="col-6" id="formCenter">
                     <div class="form">
+                        <?php if(isset($_GET['success'])) { ?> 
+                                <p id="adminMsg" class="success"><?php echo $_GET['success'];?></p>
+                        <?php } ?> 
                         <h2>View Records</h2>
                         <table width="100%" border="1" style="border-collapse:collapse;">
                             <thead>
@@ -49,7 +52,9 @@
                                             <td align="center">
                                                 <a href="admin.php?id=<?php echo rawurlencode($row["id"]); ?>&status=-1">Delete</a>
                                             </td>
-                                            <td id="block<?php echo $row["id"]; ?>" align="center">
+                                            <td id="block<?php echo $row["id"]; ?>" 
+                                                align="center"
+                                                onclick='javascript:toggle(1)'>
                                                 <a href="admin.php?id=<?php echo rawurlencode($row["id"]); ?>&status=<?php echo $row["status"]; ?>">Block</a>
                                             </td>
                                         </tr>
@@ -57,13 +62,22 @@
                             </tbody>
                         </table>
                     </div>
+                    <a class="btnLink" href="addUser_form.php">
+                        <button 
+                            id ="addUserBtn"
+                            type="submit" 
+                            class="loginButton">
+                            Add New User
+                         </button>
+                    </a> 
                 </div>                
             </div> 
         </div>
 
         <script>
-            document.getElementById("block<?php echo $row["id"]; ?>").style.display = "none";
-            
+            var blockLink = document.getElementById("block<?php echo $row["id"]; ?>").style.display = "none";
+            var unblockLink = document.getElementById("unblock<?php echo $row["id"]; ?>").style.display = "none";
+
             document.getElementById('editButton').onclick = function(){
                 document.getElementById("editButton").style.display = "none";
                 document.getElementById("saveButton").style.display = "block";
@@ -79,6 +93,17 @@
                     }
                 }
             };
+            
+            //Toggle block button (Hide / Display)
+            function myFunction() {
+                if (blockLink.style.display === "none") {
+                    blockLink.style.display = "block";
+                    unblockLink.style.display = "none";
+                } else if (unblockLink.style.display === "none") {
+                    unblockLink.style.display = "block";
+                    blockLink.style.display = "none";
+                }
+            }
         </script>
         
         <?php include 'footer.php';?>
