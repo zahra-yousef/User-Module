@@ -13,6 +13,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     $name = validate($_POST["name"]);
     $email = validate($_POST["email"]);
     $phone = validate($_POST["phone"]);
+    $dob = validate($_POST["dob"]);
     $uname = $_SESSION['user_name'];
 
     $update_image = $_FILES['profile_image']['name'];
@@ -34,16 +35,20 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     }else if (empty($phone)) {
         header("Location: profile_form.php?error=Phone is required!");
         exit();
+    }else if ($dob == '1970-01-01') {
+        header("Location: profile_form.php?error=Date of Birth is required!");
+        exit();
     }else{
         $sql = "SELECT * FROM users WHERE user_name = '$uname'";
         $result = mysqli_query($conn, $sql);
 
         if(mysqli_num_rows($result) === 1){
-            $sql = "UPDATE `users` SET email='$email', first_name ='$name', phone='$phone' WHERE user_name='$uname'";
+            $sql = "UPDATE `users` SET email='$email', first_name ='$name', phone='$phone', dob='$dob' WHERE user_name='$uname'";
             if (mysqli_query($conn, $sql)) {
                 $_SESSION['first_name'] = $name;
                 $_SESSION['email'] = $email;
                 $_SESSION['phone'] = $phone;
+                $_SESSION['dob'] = $dob;
                 
                  if(!empty($update_image)){
                     $error = !in_array($detectedType, $allowedTypes);

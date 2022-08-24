@@ -68,12 +68,12 @@
                                     disabled><br><br>
 
                             <label>Your Birth Date: </label><br>
-                            <input id="bdateTxt" 
-                                   class="profilebox"
-                                   name="dob" 
-                                   type="text" 
-                                   value="<?php echo $_SESSION['dob'];?>"
-                                   disabled><br><br>
+                            <input  id="bdatePicker"
+                                    class="profilebox"
+                                    type="date" 
+                                    name="dob" 
+                                    value="<?php echo $_SESSION['dob'];?>"
+                                    disabled><br><br>
                             
                             <label>Choose image:</label>
                             <input id="imgTxt"
@@ -118,7 +118,7 @@
             document.getElementById('editButton').onclick = function(){
                 document.getElementById("editButton").style.display = "none";
                 document.getElementById("saveButton").style.display = "block";
-                const ids = ["nameTxt", "emailTxt", "phoneTxt", "bdateTxt", "imgTxt"];
+                const ids = ["nameTxt", "emailTxt", "phoneTxt", "bdatePicker", "imgTxt"];
                 for (let i = 0; i < ids.length; i++) {
                     var disabled = document.getElementById(ids[i]).disabled;
 
