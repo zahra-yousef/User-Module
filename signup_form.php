@@ -1,12 +1,10 @@
 <?php 
     session_start();
     if(!isset($_SESSION['user_name']) && !isset($_SESSION['user_type'])){
-?>
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title>NewTech - Signup</title>
+        $title = "Signup"; 
+        include 'header.php';
+?><body>
+    <?php include 'navbar.php';?>
     <body>
         <?php include 'header.php';?>
         <script>
