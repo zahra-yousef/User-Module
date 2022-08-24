@@ -113,18 +113,7 @@
                         document.getElementById(ids[i]).disabled = true;
                     }
                 }
-            };
-            
-            //Toggle block button (Hide / Display)
-            function myFunction() {
-                if (blockLink.style.display === "none") {
-                    blockLink.style.display = "block";
-                    unblockLink.style.display = "none";
-                } else if (unblockLink.style.display === "none") {
-                    unblockLink.style.display = "block";
-                    blockLink.style.display = "none";
-                }
-            }
+            };     
         </script>
         
         <?php include 'footer.php';?>
