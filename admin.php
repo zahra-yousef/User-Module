@@ -15,8 +15,12 @@ if($status == -1){ //delete
         header("Location: admin_form.php?error=Error deleting account");
         exit();
     }
-}else{ //block
-    $status = 0;
+}else{
+    if($status == 1){ //block
+        $status = 0;
+    }else if($status == 0){ //unblock
+        $status = 1;  
+    }
     $sql = "UPDATE users SET status='$status' WHERE id='$id'";
     if (mysqli_query($conn, $sql)) {
         header("Location: admin_form.php?success=Account blocked succesfully");

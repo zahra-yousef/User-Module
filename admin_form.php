@@ -47,16 +47,37 @@
                                             <td align="center"><?php echo $row["status"]; ?></td>
 
                                             <td align="center">
-                                                <a href="editUser_form.php?id=<?php echo rawurlencode($row["id"]); ?>">Edit</a>
+                                                <a href="editUser_form.php?
+                                                   id=<?php echo rawurlencode($row["id"]); ?>">
+                                                    Edit
+                                                </a>
                                             </td>
                                             <td align="center">
-                                                <a href="admin.php?id=<?php echo rawurlencode($row["id"]); ?>&status=-1">Delete</a>
+                                                <a href="admin.php?
+                                                   id=<?php echo rawurlencode($row["id"]); ?>
+                                                   &status=-1">
+                                                    Delete
+                                                </a>
                                             </td>
-                                            <td id="block<?php echo $row["id"]; ?>" 
-                                                align="center"
-                                                onclick='javascript:toggle(1)'>
-                                                <a href="admin.php?id=<?php echo rawurlencode($row["id"]); ?>&status=<?php echo $row["status"]; ?>">Block</a>
-                                            </td>
+                                            <?php if($row["status"] == 1) {?>
+                                                <td id="block<?php echo $row["id"]; ?>" 
+                                                    align="center">
+                                                    <a href="admin.php?
+                                                       id=<?php echo rawurlencode($row["id"]); ?>
+                                                       &status=<?php echo $row["status"]; ?>">
+                                                        Block
+                                                    </a>
+                                                </td>
+                                            <?php } else if($row["status"] == 0){?>
+                                                <td id="unblock<?php echo $row["id"]; ?>" 
+                                                    align="center">
+                                                    <a href="admin.php?
+                                                       id=<?php echo rawurlencode($row["id"]); ?>
+                                                       &status=<?php echo $row["status"]; ?>">
+                                                        Unblock
+                                                    </a>
+                                                </td>
+                                            <?php  } ?>
                                         </tr>
                                 <?php } ?>
                             </tbody>
