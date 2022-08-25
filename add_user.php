@@ -28,7 +28,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if(empty($name)){
         header("Location: addUser_form.php?error=Name is required!&$user_data");
         exit();  
-    }else if (!preg_match("/^[a-zA-Z-' ]*$/",$name)) { // check if name only contains letters and whitespace
+    }else if (!preg_match("/^[a-zA-Z-' ]*$/",$name)) {
         header("Location: addUser_form.php?error=Only letters and white space allowed!&$user_data");
         exit();
     }else if (empty($uname)) {
@@ -59,7 +59,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         //hashing the password
         $pass = md5($pass); 
-        $sql = "SELECT * FROM users WHERE user_name = '$uname'";
+        $sql = "SELECT * FROM `users` WHERE user_name = '$uname'";
         $result = mysqli_query($conn, $sql);
 
         if(mysqli_num_rows($result) > 0){

@@ -1,7 +1,7 @@
 <?php 
 session_start();
 require 'query_user.php';
-if ($_SESSION['user_type'] == "User" && $_SESSION['status'] == 1){
+if (($_SESSION['user_type'] == "Admin" || $_SESSION['user_type'] == "User") && $_SESSION['status'] == 1){
     $title = "Profile"; 
     include 'header.php';   
 ?><body>
@@ -82,6 +82,7 @@ if ($_SESSION['user_type'] == "User" && $_SESSION['status'] == 1){
                             name="editButton">
                             Edit User
                     </button>
+                    <?php if ($_SESSION['user_type'] == "User"){ ?>
                     <button id="deleteButton" 
                             class="learnMore" 
                             name="deleteButton"
@@ -89,11 +90,12 @@ if ($_SESSION['user_type'] == "User" && $_SESSION['status'] == 1){
                             formaction="delete_form.php">
                         Delete Account
                     </button>
+                    <?php } ?>
                 </div>
             </div>
          </form> 
     </div>
-    <script type="text/javascript" src="buttonScript.js">
+    <script>
         document.getElementById("saveButton").style.display = "none";
         document.getElementById('editButton').onclick = function(){
             document.getElementById("editButton").style.display = "none";

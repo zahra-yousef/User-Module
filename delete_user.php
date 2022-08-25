@@ -28,7 +28,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $result = mysqli_query($conn, $sql);
 
         if(mysqli_num_rows($result) === 1){
-            $sql = "DELETE FROM users WHERE id='$id'";
+            $sql = "DELETE FROM `users` WHERE id='$id'";
             if (mysqli_query($conn, $sql)) {
                 header("Location: delete_form.php?success=Account deleted succesfully"); 
                 exit();

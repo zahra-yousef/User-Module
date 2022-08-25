@@ -43,10 +43,14 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         header("Location: editUser_form.php?id=$uid&error=User type is empty!");
         exit();
     }else{
-        $sql = "SELECT * FROM users WHERE id = '$uid'";
+        $sql = "SELECT * FROM `users` WHERE id = '$uid'";
         $result = mysqli_query($conn, $sql);
         if(mysqli_num_rows($result) === 1){
-            $sql2 = "UPDATE users SET "
+            if($result2 && $email != $_SESSION["email"]){//if the email used by other
+                header("Location: profile_form.php?error=Email is used by other user. Try again!");
+                exit();
+            } else {
+                $sql2 = "UPDATE users SET "
                      . "user_name='$uname', "
                      . "email='$email', "
                      . "first_name ='$name', "
@@ -54,30 +58,31 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                      . "user_type='$utype' "
                      . "WHERE id='$uid'";
 
-            if (mysqli_query($conn, $sql2)) {
-                if(!empty($update_image)){
-                    $error = !in_array($detectedType, $allowedTypes);
-                    if($update_image_size > 2000000){
-                        header("Location: editUser_form.php?error=Image is too large.");
-                        exit();
-                    }else if($error == 1) {
-                        header("Location: editUser_form.php?error=Sorry, only JPG, JPEG and PNG files are allowed.");
-                        exit();
-                    }else{
-                        $image_update_query = mysqli_query($conn, "UPDATE `users` SET image = '$update_image' WHERE user_name = '$uname'") 
-                                or die('query failed');
-                        if($image_update_query){
-                            move_uploaded_file($update_image_tmp_name, $update_image_folder);
+                if (mysqli_query($conn, $sql2)) {
+                    if(!empty($update_image)){
+                        $error = !in_array($detectedType, $allowedTypes);
+                        if($update_image_size > 2000000){
+                            header("Location: editUser_form.php?error=Image is too large.");
+                            exit();
+                        }else if($error == 1) {
+                            header("Location: editUser_form.php?error=Sorry, only JPG, JPEG and PNG files are allowed.");
+                            exit();
+                        }else{
+                            $image_update_sql = "UPDATE `users` SET image = '$update_image' WHERE user_name = '$uname'"; 
+
+                            if(mysqli_query($conn, $image_update_sql)){
+                                move_uploaded_file($update_image_tmp_name, $update_image_folder);
+                            }
+                            header("Location: editUser_form.php?id=$uid&success=Account information updated succesfully.");
+                            exit();
                         }
-                        header("Location: editUser_form.php?id=$uid&success=Account information updated succesfully.");
-                        exit();
                     }
+                    header("Location: editUser_form.php?id=$uid&success=User information updated succesfully.");
+                    exit();
+                }else{
+                    header("Location: editUser_form.php?id=$uid&error=User information are not updated succesfully.");
+                    exit();
                 }
-                header("Location: editUser_form.php?id=$uid&success=User information updated succesfully.");
-                exit();
-            }else{
-                header("Location: editUser_form.php?id=$uid&error=User information are not updated succesfully.");
-                exit();
             }
         }else{
             header("Location: editUser_form.php?id=$uid&error=User does not exist.");

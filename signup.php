@@ -58,11 +58,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         //hashing the password
         $pass = md5($pass); 
-        $sql = "SELECT * FROM users WHERE user_name = '$uname'";
+        $sql = "SELECT * FROM `users` WHERE user_name = '$uname' OR email = '$email'";
         $result = mysqli_query($conn, $sql);
 
         if(mysqli_num_rows($result) > 0){
-            header("Location: signup_form.php?error=The username is taken try another "
+            header("Location: signup_form.php?error=The username or email are taken try another "
                 . "&$user_data");
             exit();
         }else{
@@ -73,9 +73,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $result2 = mysqli_query($conn, $sql2);
 
             if ($result2) {
-                $sql3 = "SELECT * FROM users WHERE user_name = '$uname'";
-                $result = mysqli_query($conn, $sql);
-                $row = mysqli_fetch_assoc($result);
+                $sql3 = "SELECT * FROM `users` WHERE user_name = '$uname'";
+                $result3 = mysqli_query($conn, $sql3);
+                $row = mysqli_fetch_assoc($result3);
                 $_SESSION['id'] = $row['id'];
 
                 $_SESSION['user_name'] = $uname;

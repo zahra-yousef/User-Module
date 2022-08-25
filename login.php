@@ -23,7 +23,7 @@
             exit();
         }else {
             $pass = md5($pass); 
-            $sql = "SELECT * FROM users WHERE user_name = '$uname' AND password = '$pass'";
+            $sql = "SELECT * FROM `users` WHERE user_name = '$uname' AND password = '$pass'";
             $result = mysqli_query($conn, $sql);
 
             if(mysqli_num_rows($result) === 1){

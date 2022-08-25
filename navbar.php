@@ -1,6 +1,13 @@
 <nav>
     <ul class="top-nav" id="dropDownClick">
-        <li><a href="index.php">Home</a></li>
+        <?php if(!isset($_SESSION['user_type'])){
+            echo '<li><a href="#">Home</a></li>';
+        }else if($_SESSION['user_type'] == "User"){
+            echo '<li><a href="index.php">Home</a></li>';
+        }else{
+            echo '<li><a href="admin_form.php">Home</a></li>';
+        }?>
+        
         <li><a href="#news">Techno</a></li>
         <li><a href="#contact">Contact</a></li>
         <li><a href="#about">About</a></li>
