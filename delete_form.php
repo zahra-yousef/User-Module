@@ -1,12 +1,10 @@
 <?php 
-    session_start();
-    if(isset($_SESSION['id'])){
-        
-        include "query_user.php";
-        
-        if ($_SESSION['user_type'] == "User" && $_SESSION['status'] == 1){
-            $title = "Delete User"; 
-            include 'header.php';
+session_start();
+require 'query_user.php';
+
+if ($_SESSION['user_type'] == "User" && $_SESSION['status'] == 1){
+    $title = "Delete User"; 
+    include 'header.php';
 ?><body>
     <?php include 'navbar.php';?>
     <header>
@@ -54,16 +52,6 @@
     <?php include 'footer.php';?>
 </body>
 <?php 
-        }else{
-            if ($_SESSION['user_type'] == "Admin" && $_SESSION['status'] == 1){
-                header("Location: logout.php");
-                exit();
-            }else if($_SESSION['status'] == 0){
-                $e_msg = "User forbidden from accessing this webpage.";
-                echo "<script type='text/javascript'>alert('$e_msg');</script>";
-            } 
-        }
-    }else{
-        header("Location: login_form.php");
-        exit();
-    }
+}else{
+    require 'auth_check.php';
+}

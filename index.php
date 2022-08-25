@@ -1,10 +1,9 @@
 <?php 
-    session_start();
-    if(isset($_SESSION['id'])){
-        include "query_user.php";
-        if ($_SESSION['user_type'] == "User" && $_SESSION['status'] == 1){  
-            $title = "Home"; 
-            include 'header.php';
+session_start();
+require 'query_user.php';
+if ($_SESSION['user_type'] == "User" && $_SESSION['status'] == 1){  
+    $title = "Home"; 
+    include 'header.php';
 ?>
 <body>
     <?php include 'navbar.php';?>
@@ -19,7 +18,6 @@
                         <img src="images/code.png">
                     </div>
                     <label>Programming Courses</label>
-<!--                        https://www.lipsum.com/-->
                     <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.
                         Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
                         when an unknown printer took a galley of type 
@@ -60,17 +58,6 @@
     </div>
     <?php include 'footer.php';?>
 </body>
-<?php
-        }else{
-            if ($_SESSION['user_type'] == "Admin" && $_SESSION['status'] == 1){
-                header("Location: logout.php");
-                exit();
-            }else if($_SESSION['status'] == 0){
-                $e_msg = "User forbidden from accessing this webpage.";
-                echo "<script type='text/javascript'>alert('$e_msg');</script>";
-            } 
-        }
-    }else{
-        header("Location: login_form.php");
-        exit();
+<?php  }else{
+        require 'auth_check.php';
     }

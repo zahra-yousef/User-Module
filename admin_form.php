@@ -1,12 +1,10 @@
 <?php 
-    session_start();
-    if(isset($_SESSION['id'])){
+session_start();
+require 'query_user.php';
 
-        include "query_user.php";
-        
-        if ($_SESSION['user_type'] == "Admin" && $_SESSION['status'] == 1){
-            $title = "Admin Panel"; 
-            include 'header.php';
+if ($_SESSION['user_type'] == "Admin" && $_SESSION['status'] == 1){
+    $title = "Admin Panel"; 
+    include 'header.php';
 ?><body>
     <?php include 'navbar.php';?>
     <div class="container">
@@ -87,39 +85,9 @@
             </div>                
         </div> 
     </div>
-    <script>
-        var blockLink = document.getElementById("block<?php echo $row["id"]; ?>").style.display = "none";
-        var unblockLink = document.getElementById("unblock<?php echo $row["id"]; ?>").style.display = "none";
-
-        document.getElementById('editButton').onclick = function(){
-            document.getElementById("editButton").style.display = "none";
-            document.getElementById("saveButton").style.display = "block";
-            const ids = ["nameTxt", "emailTxt", "phoneTxt", "bdateTxt", "imgTxt"];
-            for (let i = 0; i < ids.length; i++) {
-                var disabled = document.getElementById(ids[i]).disabled;
-
-                if (disabled) {
-                    document.getElementById(ids[i]).disabled = false;
-                }
-                else {
-                    document.getElementById(ids[i]).disabled = true;
-                }
-            }
-        };     
-    </script>
     <?php include 'footer.php';?>
 </body>
 <?php 
-        }else{
-            if ($_SESSION['user_type'] == "User" && $_SESSION['status'] == 1){
-                header("Location: logout.php");
-                exit();
-            }else if($_SESSION['status'] == 0){
-                $e_msg = "User forbidden from accessing this webpage.";
-                echo "<script type='text/javascript'>alert('$e_msg');</script>";
-            } 
-        }
-    }else{
-        header("Location: login_form.php");
-        exit();
-    }
+}else{
+    require 'auth_check.php';
+}

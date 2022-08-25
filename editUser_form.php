@@ -1,14 +1,11 @@
 <?php 
-    session_start();
-    if(isset($_SESSION['id'])){
-
-        include "query_user.php";
-        
-        if ($_SESSION['user_type'] == "Admin" && $_SESSION['status'] == 1){
-            if(isset($_REQUEST['id'])){
-                $id = $_REQUEST['id'];
-                $title = "Update User"; 
-                include 'header.php';
+session_start();
+require 'query_user.php';
+if ($_SESSION['user_type'] == "Admin" && $_SESSION['status'] == 1){
+    if(isset($_REQUEST['id'])){
+        $id = $_REQUEST['id'];
+        $title = "Update User"; 
+        include 'header.php';
 ?><body>
     <?php include 'navbar.php';?>
     <header>
@@ -83,8 +80,15 @@
                                 class="profilebox" 
                                 name="utype"
                                 disabled>
-                            <option value="User" <?php if ($row['user_type'] == 'User') echo ' selected="selected"'; ?>>Normal User</option>
-                            <option value="Admin" <?php if ($row['user_type'] == 'Admin') echo ' selected="selected"'; ?>>Admin</option>
+                            <option value="User"
+                                <?php if ($row['user_type'] == 'User') echo ' selected="selected"'; ?>
+                                >Normal User
+                            </option>
+                            <option 
+                                value="Admin"
+                                <?php if ($row['user_type'] == 'Admin') echo ' selected="selected"'; ?>>
+                                Admin
+                            </option>
                         </select><br><br>
                         <button id="saveButton" 
                             class="learnMore" 
@@ -121,23 +125,14 @@
             }
         };
     </script>
+    
     <?php include 'footer.php';?>
 </body>
 <?php 
-            }else{
-                header("Location: admin_form.php");
-                exit();
-            }
-        }else{
-            if ($_SESSION['user_type'] == "User" && $_SESSION['status'] == 1){
-                header("Location: login_form.php");
-                exit();
-            }else{
-                header("Location: admin_form.php");
-                exit();
-            } 
-        }
     }else{
-        header("Location: login_form.php");
+        header("Location: admin_form.php");
         exit();
     }
+}else{
+    require 'auth_check.php';
+}

@@ -1,7 +1,6 @@
 <?php
     session_start();
-    
-    include "connection.php";
+    require 'connection.php';
     
     $uname = $pass = "";
 
@@ -39,14 +38,9 @@
                     $_SESSION['phone'] = $row['phone'];
                     $_SESSION['user_type'] = $row['user_type'];
                     $_SESSION['status'] = $row['status'];
-                    
-                    if($_SESSION['user_type'] == "Admin"){
-                        header("Location: admin_form.php");
-                        exit();
-                    }else if($_SESSION['user_type'] == "User"){
-                        header("Location: index.php");
-                        exit();
-                    }
+                                        
+                    header("Location: auth_check.php");
+                    exit();
                  } else {
                     header("Location: login_form.php?error=Incorect User name or password");
                     exit();

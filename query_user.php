@@ -1,6 +1,6 @@
 <?php
 /*This script used to query user info and update them based in db*/
-include "connection.php";
+require 'connection.php';
 $id = $_SESSION['id'];
 
 $select = mysqli_query($conn, "SELECT * FROM `users` WHERE id = '$id'") 

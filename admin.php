@@ -1,6 +1,6 @@
 <?php
 session_start();
-include "connection.php";
+require 'connection.php';
 
 $id = $_REQUEST['id'];
 $status = $_REQUEST['status'];
